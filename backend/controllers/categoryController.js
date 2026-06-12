@@ -1,0 +1,35 @@
+const { v4: uuidv4 } = require('uuid');
+const sharp = require('sharp');
+const asyncHandler = require('express-async-handler');
+const slugify = require('slugify');
+
+const factory = require('./handlersFactory');
+const { uploadSingleImage } = require('../middlewares/uploadImageMiddleware');
+const { uploadBuffer } = require('../config/cloudinary');
+const Category = require('../models/categoryModel');
+
+exports.uploadCategoryImage = uploadSingleImage('image');
+
+exports.resizeImage = asyncHandler(async (req, res, next) => {
+  if (req.file) {
+    const filename = `category-${uuidv4()}-${Date.now()}`;
+    const buffer = await sharp(req.file.buffer)
+      .resize(600, 600)
+      .toFormat('jpeg')
+      .jpeg({ quality: 90 })
+      .toBuffer();
+    req.body.image = await uploadBuffer(buffer, 'categories', filename);
+  }
+  next();
+});
+
+exports.setSlug = (req, res, next) => {
+  if (req.body.name) req.body.slug = slugify(req.body.name);
+  next();
+};
+
+exports.getCategories = factory.getAll(Category);
+exports.getCategory = factory.getOne(Category);
+exports.createCategory = factory.createOne(Category);
+exports.updateCategory = factory.updateOne(Category);
+exports.deleteCategory = factory.deleteOne(Category);

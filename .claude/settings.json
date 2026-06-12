@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cd \"c:/Users/noor/Desktop/tandinshop/frontend\" && vercel env rm REACT_APP_API_URL production --yes 2>&1 | tail -1; vercel env add REACT_APP_API_URL production --value \"https://tandinshop-server-eight.vercel.app/\" --yes 2>&1 | tail -1; vercel env pull \"C:/Users/noor/AppData/Local/Temp/envcheck\" --environment=production 2>&1 | tail -1 && grep REACT_APP \"C:/Users/noor/AppData/Local/Temp/envcheck\")",
+      "Read(//c/Users/noor/AppData/Local/Temp/**)",
+      "Bash(curl -s --max-time 30 -o /tmp/fe.html -w \"frontend: %{http_code}\\\\n\" https://tandinshop.vercel.app/)"
+    ]
+  }
+}

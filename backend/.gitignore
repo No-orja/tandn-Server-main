@@ -1,0 +1,11 @@
+node_modules/
+.env
+npm-debug.log*
+
+# Keep the uploads folders but ignore generated/seeded image files
+uploads/**/*.jpeg
+uploads/**/*.jpg
+uploads/**/*.png
+!uploads/**/.gitkeep
+
+.vercel
