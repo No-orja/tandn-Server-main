@@ -16,17 +16,29 @@ dbConnection();
 
 const app = express();
 
-// CORS — allow the deployed frontend (CLIENT_URL) and the local dev server.
-const allowedOrigins = [process.env.CLIENT_URL, 'http://localhost:3000'].filter(
-  Boolean
-);
-app.use(
-  cors({
-    origin: allowedOrigins,
-    credentials: true,
-  })
-);
-app.options('*', cors());
+// CORS — allow the local dev server, the production frontend, and any Vercel
+// preview URL for this frontend (origins ending in .vercel.app). An origin
+// function is used so preview deployments work without hardcoding each URL.
+const allowedOrigins = [
+  process.env.CLIENT_URL,
+  'http://localhost:3000',
+  'https://tandinshop.vercel.app',
+].filter(Boolean);
+
+const corsOptions = {
+  origin: (origin, cb) => {
+    // allow non-browser requests (no Origin header), exact matches, and *.vercel.app
+    if (!origin || allowedOrigins.includes(origin) || /\.vercel\.app$/.test(origin)) {
+      return cb(null, true);
+    }
+    return cb(new Error('Not allowed by CORS'));
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+};
+
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
 
 // Body parser
 app.use(express.json({ limit: '20kb' }));
