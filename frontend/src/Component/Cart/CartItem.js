@@ -11,7 +11,8 @@ export default function CardIem({item}){
 
   const [show, handleDeleteClose, handelDeleteItem, handleDeleteClicked,itemCount , onChangeCount, handeleUpdateCart ] = DeleteItemFromCartHook(item)
   const imageUrl = (imageCover)=>{
-    return imageCover.startsWith('http') ? item?.product.imageCover : `http://127.0.0.1:8000/products/${item.imageCover}`;
+    if(!imageCover) return mobile;
+    return imageCover.startsWith('http') ? imageCover : `https://tandinshop-server-eight.vercel.app/products/${imageCover}`;
 }
 
   return(
@@ -30,7 +31,13 @@ export default function CardIem({item}){
         </Modal.Footer>
       </Modal>
       
-      <img width="160px" height="197px" src={imageUrl|| mobile} alt="" />
+      <img
+        width="160px"
+        height="197px"
+        src={imageUrl(item?.product?.imageCover)}
+        alt=""
+        style={{ objectFit: "contain", backgroundColor: "#fff", padding: "4px", borderRadius: "8px" }}
+      />
       <div className="w-100">
         <Row className="justify-content-between">
           <Col sm="12" className=" d-flex flex-row justify-content-between">
@@ -80,7 +87,7 @@ export default function CardIem({item}){
               />
               <Button onClick={handeleUpdateCart} className='btn btn-dark' >تطبيق</Button>
             </div>
-            <div className="d-inline pt-2 barnd-text">{item?.price} جنية</div>
+            <div className="d-inline pt-2 barnd-text">{item?.price} ₪</div>
           </Col>
         </Row>
       </div>

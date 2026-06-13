@@ -2,7 +2,7 @@ import { Row } from "react-bootstrap";
 import SideBarSearchHook from "../../Hook/Search/SideBarSearchHook";
 
 export default function SideFillter(){
-    const [allCategory, allBrand, clickCategory, clickBrand] = SideBarSearchHook()
+    const [allCategory, allBrand, clickCategory, clickBrand, priceFrom, priceTo, onChangePriceFrom, onChangePriceTo] = SideBarSearchHook()
     
     return(
         <div className="mt-3">
@@ -27,7 +27,7 @@ export default function SideFillter(){
                 <div className="d-flex flex-column mt-2">
                     <div className="filter-title mt-3">الماركة</div>
                         <div className="d-flex mt-3">
-                        <input type="checkbox" value="" />
+                        <input type="checkbox" value="0" onChange={clickBrand} />
                         <div className="filter-sub me-2 ">الكل</div>
                     </div>
                     {
@@ -48,6 +48,8 @@ export default function SideFillter(){
                     <input
                     className="m-2 text-center"
                     type="number"
+                    value={priceFrom}
+                    onChange={onChangePriceFrom}
                     style={{ width: "50px", height: "25px" }}
                     />
                 </div>
@@ -57,6 +59,8 @@ export default function SideFillter(){
                     <input
                     className="m-2 text-center"
                     type="number"
+                    value={priceTo}
+                    onChange={onChangePriceTo}
                     style={{ width: "50px", height: "25px" }}
                     />
                 </div>

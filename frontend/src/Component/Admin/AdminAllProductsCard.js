@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import {featchDeletingProduct} from "../../Redux/Reduser/ProductSliceReducer"
 import { useState } from "react";
+import notify from "../../Hook/UseNotifaction";
 
 //Modal
 import Button from 'react-bootstrap/Button';
@@ -18,11 +19,17 @@ export default function AdminAllProductsCard({product}){
     const handleDeleteClose = () => setShow(false);
 
     const handleDeleteConfime = async (productId) =>{
-
-        setIsDeleted(false);
-        await dispatch(featchDeletingProduct(productId));
-        setIsDeleted(true)
-    } 
+        const action = await dispatch(featchDeletingProduct(productId));
+        setShow(false);
+        // the slice removes the item from state on success -> the card unmounts
+        // instantly (no manual refresh). isDeleted is a belt-and-suspenders hide.
+        if (action.payload?.status === 200) {
+            setIsDeleted(true);
+            notify("تم حذف المنتج بنجاح", "success");
+        } else {
+            notify("حدث خطأ أثناء الحذف", "error");
+        }
+    }
 
     const [isDeleted, setIsDeleted] = useState(false)
 

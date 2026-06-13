@@ -233,8 +233,10 @@ body {
 
 /* products details page */
 .product-gallary-card {
-  height: 470px !important;
-  width: 370px;
+  min-height: 470px !important;
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
   border-radius: 29px;
   background-color: #ffffff;
 }
@@ -348,13 +350,81 @@ body {
   color: #bdbaba !important;
 }
 /* products gallary slide style */
-.image-gallery-slide {
-  width: 372px;
-  height: 470px;
+/* react-image-gallery (scoped via additionalClass="tandin-gallery").
+   DEFINITIVE no-crop rule: the IMAGE gets a FIXED PIXEL height (450px) so it does
+   NOT depend on the library's percentage-height chain (swipe/slides/slide), which
+   the Swipeable wrapper can break — when it breaks, height:100% collapses to the
+   natural image height and the overflow:hidden wrapper crops tall images. A fixed
+   px height always resolves, so object-fit:contain ALWAYS has a real box to fit
+   inside and every aspect ratio (wide/tall/square) shows in full, letterboxed.
+   Unscoped fallbacks are included in case additionalClass ever fails to apply. */
+.tandin-gallery,
+.tandin-gallery .image-gallery-content,
+.tandin-gallery .image-gallery-slide-wrapper {
+  width: 100%;
+}
+.image-gallery-slide-wrapper,
+.tandin-gallery .image-gallery-slide-wrapper {
+  height: 450px;
+  background-color: #fafafa;
   border-radius: 29px;
+  overflow: hidden;
+}
+.image-gallery-swipe,
+.image-gallery-slides,
+.image-gallery-slide,
+.tandin-gallery .image-gallery-swipe,
+.tandin-gallery .image-gallery-slides,
+.tandin-gallery .image-gallery-slide {
+  height: 100%;
+}
+.image-gallery-slide,
+.tandin-gallery .image-gallery-slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fafafa;
+  padding: 12px;
+}
+/* the image itself — NEVER given a fixed height; it sizes to its natural aspect
+   ratio and only scales DOWN to fit the fixed 450px box, so it can never be
+   stretched or cropped (the full HP Victus laptop, ports included, stays visible). */
+.image-gallery-image,
+.image-gallery-slide .image-gallery-image,
+.tandin-gallery .image-gallery-slide .image-gallery-image {
+  display: block !important;
+  width: auto !important;
+  height: auto !important;
+  max-width: 100% !important;
+  max-height: 450px !important;
+  margin: auto !important;
+  object-fit: contain !important;
+  object-position: center !important;
+  background-color: #fafafa;
+  border-radius: 29px;
+}
+/* thumbnail strip (if ever enabled) — contain so thumbs aren't cropped either */
+.image-gallery-thumbnail-image,
+.tandin-gallery .image-gallery-thumbnail-image {
+  height: 60px !important;
+  object-fit: contain !important;
+  object-position: center !important;
+  background-color: #fafafa;
 }
 /* end gallary */
 /* end products page */
+
+/* Global image safety net: content images are shown in full (no cropping) */
+.card-img,
+.card-img-top {
+  object-fit: contain;
+  background-color: #ffffff;
+}
+.img-contain {
+  object-fit: contain !important;
+  object-position: center !important;
+  background-color: #ffffff;
+}
 
 /* pagination */
 .page-link {

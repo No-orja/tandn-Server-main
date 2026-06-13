@@ -25,7 +25,10 @@ export default function CategoryCard({ img, title, id }) {
             style={{
               width: "100%",
               height: "150px",
-              objectFit: "cover",
+              objectFit: "contain",
+              objectPosition: "center",
+              backgroundColor: "#fff",
+              padding: "10px",
               borderTopLeftRadius: "10px",
               borderTopRightRadius: "10px",
             }}

@@ -6,7 +6,7 @@ export const updateUserDataSlice = createAsyncThunk(
     "userData/updateData",
     async (body , { rejectWithValue }) => {
         try {
-            const response = await useUpdateData(`/api/v1/users/updateMe`, body);    
+            const response = await useUpdateData(`/users/updateMe`, body);    
             console.log("The res of update userData", response)
             if (!response) {
                 throw new Error("لم يتم استلام استجابة من السيرفر");
@@ -25,7 +25,7 @@ export const updateUserPasswordSlice = createAsyncThunk(
     "userData/updatePassword",
     async (body , { rejectWithValue }) => {
         try {
-            const response = await useUpdateData(`/api/v1/users/changeMyPassword`, body);    
+            const response = await useUpdateData(`/users/changeMyPassword`, body);    
             console.log("The res of update password", response)
             if (!response) {
                 throw new Error("لم يتم استلام استجابة من السيرفر");

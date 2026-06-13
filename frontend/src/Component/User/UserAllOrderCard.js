@@ -8,7 +8,17 @@ export default function UserAllOrderCard({item}){
             <Row className="d-flex mb-2">
                 <Col xs="3" md="2" className="d-flex justify-content-start">
                     <Link to={`/products/${item?.product._id}`} style={{ textDecoration: 'none' }}>
-                        <img width="93px" height="120px" src={`http://127.0.0.1:8000/products/${item.product.imageCover}`} alt="" />
+                        <img
+                            width="93px"
+                            height="120px"
+                            src={item?.product?.imageCover
+                                ? (item.product.imageCover.startsWith('http')
+                                    ? item.product.imageCover
+                                    : `https://tandinshop-server-eight.vercel.app/products/${item.product.imageCover}`)
+                                : mobile}
+                            alt=""
+                            style={{ objectFit: "contain", backgroundColor: "#fff" }}
+                        />
                     </Link>
                 </Col>
                 <Col xs="8" md="6">

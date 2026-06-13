@@ -8,7 +8,7 @@ import { useUpdateData } from "../../Hooks/UseUpdateData";
 //ALL CART
 export const featchAddToCart = createAsyncThunk("ADD_TO_CART", async (body, { rejectWithValue })=>{
     try{
-        const response = await useInsertData(`/api/v1/cart`, body)
+        const response = await useInsertData(`/cart`, body)
         console.log("API Response add to cart :", response); 
         return response;        
     }catch(error){
@@ -19,7 +19,7 @@ export const featchAddToCart = createAsyncThunk("ADD_TO_CART", async (body, { re
 //ALL CART
 export const featchAllCart = createAsyncThunk("ALL_CART", async (_,{ rejectWithValue })=>{
     try{
-        const response = await useGetDataToken(`/api/v1/cart`)
+        const response = await useGetDataToken(`/cart`)
         console.log("API Response all cart :", response); 
         return response;        
     }catch(error){
@@ -30,7 +30,7 @@ export const featchAllCart = createAsyncThunk("ALL_CART", async (_,{ rejectWithV
 //DELETE ALL CART
 export const featchDeleteAllCart = createAsyncThunk("DELETE_ALL_CART", async (_,{ rejectWithValue })=>{
     try{
-        const response = await useDeleteDataToken(`/api/v1/cart`)
+        const response = await useDeleteDataToken(`/cart`)
         console.log("API Response delete all cart :", response); 
         return response;        
     }catch(error){
@@ -41,7 +41,7 @@ export const featchDeleteAllCart = createAsyncThunk("DELETE_ALL_CART", async (_,
 //DELETE SPISIFIC CART
 export const featchDeleteSpecificCart = createAsyncThunk("DELETE_SPECIFIC_CART", async (id,{ rejectWithValue })=>{
     try{
-        const response = await useDeleteDataToken(`/api/v1/cart/${id}`)
+        const response = await useDeleteDataToken(`/cart/${id}`)
         console.log("API Response delete spisific cart :", response); 
         return response;        
     }catch(error){
@@ -53,7 +53,7 @@ export const featchDeleteSpecificCart = createAsyncThunk("DELETE_SPECIFIC_CART",
 //UPDATE SPISIFIC CART
 export const featchUpdateSpecificCart = createAsyncThunk("UPDATE_SPECIFIC_CART", async ({id, body},{ rejectWithValue })=>{
     try{
-        const response = await useUpdateData(`/api/v1/cart/${id}`, body)
+        const response = await useUpdateData(`/cart/${id}`, body)
         console.log("API Response update spisific cart :", response); 
         return response;        
     }catch(error){
@@ -64,7 +64,7 @@ export const featchUpdateSpecificCart = createAsyncThunk("UPDATE_SPECIFIC_CART",
 //APPLY COUPON
 export const featchApplyCoupon = createAsyncThunk("APPLY_COUPON_CART", async (body,{ rejectWithValue })=>{
     try{
-        const response = await useUpdateData(`/api/v1/cart/applyCoupon`, body)
+        const response = await useUpdateData(`/cart/applyCoupon`, body)
         console.log("API Response apply coupon cart :", response); 
         return response;        
     }catch(error){

@@ -6,9 +6,9 @@ import { useInsertDataWithImage } from "../../Hooks/UseInsertData";
 
 
 //GET ALL PRODUCT
-export const featchAllProduct = createAsyncThunk("GET_ALL_PRODUCT", async (limit)=>{
+export const featchAllProduct = createAsyncThunk("GET_ALL_PRODUCT", async (limit = 20)=>{
     try{
-        const response = await useGetData(`/api/v1/products?limit=${limit}`)
+        const response = await useGetData(`/products?limit=${limit}`)
         console.log("API Response All product:", response); 
         return response;        
     }catch(error){
@@ -20,7 +20,7 @@ export const featchAllProduct = createAsyncThunk("GET_ALL_PRODUCT", async (limit
 //GET ALL PRODUCT
 export const featchAllProductPage = createAsyncThunk("GET_ALL_PRODUCT_Page", async ({limit, page})=>{
     try{
-        const response = await useGetData(`/api/v1/products?limit=${limit}&page=${page}`)
+        const response = await useGetData(`/products?limit=${limit}&page=${page}`)
         console.log("API Response All product page:", response); 
         return response;        
     }catch(error){
@@ -32,7 +32,7 @@ export const featchAllProductPage = createAsyncThunk("GET_ALL_PRODUCT_Page", asy
 //GET PRODUCTS SEARCH
 export const featchProductSearch = createAsyncThunk("GET_SEARTCH_PRODUCT", async (queryString) => {
     try {
-        const response = await useGetData(`/api/v1/products?${queryString}`);
+        const response = await useGetData(`/products?${queryString}`);
         console.log("API Response (Search):", response);
         return response;
     } catch (error) {
@@ -42,20 +42,21 @@ export const featchProductSearch = createAsyncThunk("GET_SEARTCH_PRODUCT", async
 });
 
 //ADD PRODUCT
-export const featchAddProduct = createAsyncThunk("ADD_PRODUCT", async (formData) => {
+export const featchAddProduct = createAsyncThunk("ADD_PRODUCT", async (formData, { rejectWithValue }) => {
     try {
-        const response = await useInsertDataWithImage(`/api/v1/products`, formData);
+        const response = await useInsertDataWithImage(`/products`, formData);
         console.log("API Response Add Product:", response);
         return response;
     } catch (error) {
-        console.error("Error adding product:", error);
-        throw error;
+        // Surface the server's validation message (lost if we just re-throw the axios error)
+        console.error("Error adding product:", error.response?.data || error.message);
+        return rejectWithValue(error.response?.data || { message: error.message });
     }
 });
 
 export const featchGittingSpecificProduct = createAsyncThunk("GET_SPECIFIC_PRODUCT", async (id)=>{
     try{
-        const response = await useGetData(`/api/v1/products/${id}`)
+        const response = await useGetData(`/products/${id}`)
         console.log("API Response Specific Product:", response);
         return response
     }catch(error){
@@ -66,7 +67,7 @@ export const featchGittingSpecificProduct = createAsyncThunk("GET_SPECIFIC_PRODU
 //GET PRODUCT LIKE
 export const featchGittingProductLike = createAsyncThunk("GET_PRODUCT_LIKE", async (id)=>{
     try{
-        const response = await useGetData(`/api/v1/products?category=${id}`)
+        const response = await useGetData(`/products?category=${id}`)
         console.log("API Response Product like:", response);
         return response
     }catch(error){
@@ -78,7 +79,7 @@ export const featchGittingProductLike = createAsyncThunk("GET_PRODUCT_LIKE", asy
 //DELETE PRODUCT
 export const featchDeletingProduct = createAsyncThunk("DELETE_PRODUCT", async (id, thunkAPI) => {
     try {
-        const response = await useDeleteData(`/api/v1/products/${id}` );
+        const response = await useDeleteData(`/products/${id}` );
         console.log("API Response Delete Product:", response); 
         return response; 
     } catch (error) {
@@ -90,7 +91,7 @@ export const featchDeletingProduct = createAsyncThunk("DELETE_PRODUCT", async (i
 //UPDATE PRODUCT
 export const featchUpdatingProduct = createAsyncThunk("UPDATE_PRODUCT", async ({ id, formData }, thunkAPI) => {
     try {
-        const response = await useUpdateDataWithImage(`/api/v1/products/${id}`, formData);
+        const response = await useUpdateDataWithImage(`/products/${id}`, formData);
         console.log("API Response Update Product:", response); 
         return response; 
     } catch (error) {
@@ -102,7 +103,7 @@ export const featchUpdatingProduct = createAsyncThunk("UPDATE_PRODUCT", async ({
 //GET PRODUCTS BY CATEGORY
 export const featchProductsByCategory = createAsyncThunk("PRODUCTS_BY_CATEGORY", async ({ id, limit = 20}, thunkAPI) => {
     try {
-        const response = await useGetData(`/api/v1/products?category=${id}&&limit=${limit}`);
+        const response = await useGetData(`/products?category=${id}&&limit=${limit}`);
         console.log("API Response Products By Category:", response); 
         return response; 
     } catch (error) {
@@ -113,7 +114,7 @@ export const featchProductsByCategory = createAsyncThunk("PRODUCTS_BY_CATEGORY",
 //GET PRODUCTS BY CATEGORY
 export const featchProductsByCategoryPage = createAsyncThunk("PRODUCTS_BY_CATEGORY_page", async ({ id, limit = 20, page = 1 }, thunkAPI) => {
     try {
-        const response = await useGetData(`/api/v1/products?category=${id}&limit=${limit}&page=${page}`);
+        const response = await useGetData(`/products?category=${id}&limit=${limit}&page=${page}`);
         console.log("API Response Products By Category page:", response); 
         return response; 
     } catch (error) {
@@ -124,7 +125,7 @@ export const featchProductsByCategoryPage = createAsyncThunk("PRODUCTS_BY_CATEGO
 //GET PRODUCTS BY BRAND
 export const featchProductsByBrandPage = createAsyncThunk("PRODUCTS_BY_BRAND_PAGE", async ( id,thunkAPI) => {
     try {
-        const response = await useGetData(`/api/v1/products?brand=${id}`);
+        const response = await useGetData(`/products?brand=${id}`);
         console.log("API Response Products By brand page:", response); 
         return response; 
     } catch (error) {
@@ -137,6 +138,7 @@ const allCategoryApiSlice = createSlice({
     name: "allProduct",
     initialState:{
         allProduct:[],
+        addProduct:[],
         searchResults: [],
         peoductsByCategory:[],
         peoductsByCategoryPage:[],
@@ -191,7 +193,8 @@ const allCategoryApiSlice = createSlice({
         .addCase(featchAddProduct.pending,(state, action)=>{
             state.isLoading = true
         }).addCase(featchAddProduct.fulfilled, (state, action)=>{
-            state.allProduct = action.payload;
+            // keep the GET list shape intact — store the create response separately
+            state.addProduct = action.payload;
             state.isLoading = false
             state.error = null
         }).addCase(featchAddProduct.rejected, (state, action)=>{
@@ -232,6 +235,12 @@ const allCategoryApiSlice = createSlice({
             if (action.payload.status === 200) { // التحقق من نجاح الحذف
                 console.log("Product deleted successfully!");
                 state.deleteProduct = action.payload
+                // remove the deleted product from the stored list so the UI
+                // updates instantly (no manual refresh). id = thunk arg.
+                const deletedId = action.meta.arg;
+                if (state.allProduct?.data) {
+                    state.allProduct.data = state.allProduct.data.filter((p) => p._id !== deletedId);
+                }
             }
             state.isLoading = false;
             state.error = null;

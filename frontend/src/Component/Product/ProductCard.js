@@ -66,7 +66,8 @@ export default function ProductCard({favProd, item}) {
     }
 
     const imageUrl = (imageCover)=>{
-        return imageCover.startsWith('http') ? item?.imageCover : `http://127.0.0.1:8000/products/${item.imageCover}`;
+        if(!imageCover) return "";
+        return imageCover.startsWith('http') ? imageCover : `https://tandinshop-server-eight.vercel.app/products/${imageCover}`;
     }
     return (
         <Col xs="6" sm="6" md="4" lg="3" className="d-flex">
@@ -82,7 +83,18 @@ export default function ProductCard({favProd, item}) {
                 }}>
 
                 <Link to={`/products/${item?._id}`} style={{ textDecoration: "none" }}>
-                    <Card.Img  style={{ height: "180px", width: "100%", objectFit: "contain" }} src={imageUrl(item?.imageCover)} />
+                    <Card.Img
+                        style={{
+                            height: "180px",
+                            width: "100%",
+                            objectFit: "contain",
+                            objectPosition: "center",
+                            backgroundColor: "#fff",
+                            padding: "12px",
+                            borderRadius: "8px",
+                        }}
+                        src={imageUrl(item?.imageCover)}
+                    />
                 </Link>
                     
                 <div className="d-flex justify-content-end mx-2">

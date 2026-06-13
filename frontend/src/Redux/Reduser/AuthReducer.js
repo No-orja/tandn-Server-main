@@ -5,7 +5,7 @@ import {useUpdateData, useUpdateDataWithImage} from '../../Hooks/UseUpdateData';
 //Create a user
 export const fetchCreateUserSlice  = createAsyncThunk("CREATE_USER",async (formData,{rejectWithValue}) => {
     try{
-        const response = await useInsertData(`/api/v1/auth/signup`,formData) 
+        const response = await useInsertData(`/auth/signup`,formData) 
         console.log("API Response Create User:", response);
         return response;
 
@@ -17,7 +17,7 @@ export const fetchCreateUserSlice  = createAsyncThunk("CREATE_USER",async (formD
 }) 
 export const fetchLoginSlice = createAsyncThunk("LOGIN_USER",async (formData,{rejectWithValue}) => {
     try{
-        const response = await useInsertData(`/api/v1/auth/login`, formData) 
+        const response = await useInsertData(`/auth/login`, formData) 
         console.log("API Response Login User:", response);
         return response;
 
@@ -29,7 +29,7 @@ export const fetchLoginSlice = createAsyncThunk("LOGIN_USER",async (formData,{re
 
 export const fetchForgetPasswordSlice = createAsyncThunk("FORGET_PASSWORD",async (data,{rejectWithValue}) => {
     try{
-        const response = await useInsertData(`/api/v1/auth/forgotPasswords`, data) 
+        const response = await useInsertData(`/auth/forgotPasswords`, data) 
         console.log("API Response Forget Password User:", response);
         return response;
 
@@ -41,7 +41,7 @@ export const fetchForgetPasswordSlice = createAsyncThunk("FORGET_PASSWORD",async
 
 export const fetchVerifyResetCodeSlice = createAsyncThunk("VERIFY_CODE",async (data,{rejectWithValue}) => {
     try{
-        const response = await useInsertData(`/api/v1/auth/verifyResetCode`, data) 
+        const response = await useInsertData(`/auth/verifyResetCode`, data) 
 
         console.log("API Response rest Password User:", response);
         return response;
@@ -55,7 +55,7 @@ export const fetchVerifyResetCodeSlice = createAsyncThunk("VERIFY_CODE",async (d
 //Reset Password
 export const fetcResetPasswordSlice = createAsyncThunk("RESET_PASSWORD",async (data,{rejectWithValue}) => {
     try{
-        const response = await useUpdateData(`/api/v1/auth/resetPassword`, data) 
+        const response = await useUpdateData(`/auth/resetPassword`, data) 
 
         console.log("API Response final step for rest Password User:", response);
         return response;

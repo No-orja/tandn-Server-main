@@ -66,7 +66,7 @@ export default function ChoosePay(){
 
             <Row>
                 <Col xs="12" className="d-flex justify-content-end">
-                    <div className="product-price d-inline   border">34000 جنية</div>
+                    <div className="product-price d-inline   border">34000 ₪</div>
                     <div  className="product-cart-add px-3 pt-2 d-inline me-2" onClick={createOrederCash}> اتمام الشراء</div>
                 </Col>
             </Row>

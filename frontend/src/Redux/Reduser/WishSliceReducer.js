@@ -7,7 +7,7 @@ import { useDeleteDataToken } from "../../Hooks/UseDeleteData";
 export const featchAllWishListProduct = createAsyncThunk("ALL_WISH_PRODUCT", async (_,{rejectWithValue} )=>{
     //_ "Know why we added it + i was have error (forget _)"
     try{
-        const response = await useGetDataToken(`/api/v1/wishlist`)
+        const response = await useGetDataToken(`/wishlist`)
         console.log("API Response all wish product:", response); 
         return response;        
     }catch(error){
@@ -20,7 +20,7 @@ export const featchAllWishListProduct = createAsyncThunk("ALL_WISH_PRODUCT", asy
 export const featchAddWishListProduct = createAsyncThunk("ADD_WISH_PRODUCT", async (body,{rejectWithValue} )=>{
     //_ "Know why we added it + i was have error (forget _)"
     try{
-        const response = await useInsertData(`/api/v1/wishlist`, body)
+        const response = await useInsertData(`/wishlist`, body)
         console.log("API Response add wish product:", response); 
         return response;        
     }catch(error){
@@ -32,7 +32,7 @@ export const featchAddWishListProduct = createAsyncThunk("ADD_WISH_PRODUCT", asy
 export const featchDeleteWishListProduct = createAsyncThunk("DELETE _WISH_PRODUCT", async (id,{rejectWithValue} )=>{
     //_ "Know why we added it + i was have error (forget _)"
     try{
-        const response = await useDeleteDataToken(`/api/v1/wishlist/${id}`)
+        const response = await useDeleteDataToken(`/wishlist/${id}`)
         console.log("API Response Delete wish product:", response); 
         return response;        
     }catch(error){

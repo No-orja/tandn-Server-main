@@ -22,7 +22,8 @@ export default function RiewSearchProductHook(){
         let updatedSort = storData();  // ✅ الحصول على القيمة المحدثة فورًا
         let queryCategory = localStorage.getItem("quertCategory") || "";
         let queryBrand = localStorage.getItem("quertBrand") || "";
-    
+        let queryPrice = localStorage.getItem("queryPrice") || "";
+
         let finalQuery = `sort=${updatedSort}&limit=${limit}`;
         if (word) {
             // الباك اند يدعم البحث الجزئي عن طريق keyword وليس title
@@ -33,6 +34,9 @@ export default function RiewSearchProductHook(){
         }
         if(queryBrand){
             finalQuery += `&${queryBrand}`
+        }
+        if(queryPrice){
+            finalQuery += `&${queryPrice}`
         }
     
         console.log("🚀 استعلام البحث النهائي بعد الإصلاح:", finalQuery);

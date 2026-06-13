@@ -35,6 +35,8 @@ import AdminEditCouponPage from './Page/Admin/AdminEditCouponPage';
 import AdminAddBrandPage from './Page/Admin/AdminAddBrandPage';
 import ProductsByBrand from './Page/Product/ProductByBrand';
 import AdminAllOrderDetailsPage from './Page/Admin/AdminOrderDetailsPage';
+import AdminAllCategoryPage from './Page/Admin/AdminAllCategoryPage';
+import AdminAllBrandPage from './Page/Admin/AdminAllBrandPage';
 
 function App() {
 
@@ -63,6 +65,8 @@ function App() {
         {/* <Route element={<ProtectedRoute auth={isAdmin}/>}> */}
           {/* Admin */}
           <Route path='/admin/allproducts' element={<AdminAllProductPage/>}/>
+          <Route path='/admin/allcategories' element={<AdminAllCategoryPage/>}/>
+          <Route path='/admin/allbrands' element={<AdminAllBrandPage/>}/>
           <Route path='/admin/allorders' element={<AdminAllOrderPage/>}/>
           <Route path='/admin/orders/23' element={<AdminOrderDetailsPage/>}/>
           <Route path='/admin/addbrand' element={<AdminAddBrandPage/>}/>

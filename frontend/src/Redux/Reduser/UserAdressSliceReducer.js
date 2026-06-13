@@ -9,7 +9,7 @@ export const addUserAddress = createAsyncThunk(
     "userAddress/add",
     async (addressData, { rejectWithValue }) => {
         try {
-            const response = await useInsertData("/api/v1/addresses", addressData);
+            const response = await useInsertData("/addresses", addressData);
 
             if (!response) {
                 throw new Error("لم يتم استلام استجابة من السيرفر");
@@ -28,7 +28,7 @@ export const getAllUserAddress = createAsyncThunk(
     "userAddress/getAll",
     async (_, { rejectWithValue }) => {
         try {
-            const response = await useGetDataToken("/api/v1/addresses");    
+            const response = await useGetDataToken("/addresses");    
 
             if (!response) {
                 throw new Error("لم يتم استلام استجابة من السيرفر");
@@ -47,7 +47,7 @@ export const deleteUserAddress = createAsyncThunk(
     "userAddress/delete",
     async (id, { rejectWithValue }) => {
         try {
-            const response = await useDeleteDataToken(`/api/v1/addresses/${id}`);    
+            const response = await useDeleteDataToken(`/addresses/${id}`);    
 
             if (!response) {
                 throw new Error("لم يتم استلام استجابة من السيرفر");
@@ -66,7 +66,7 @@ export const updateUserAddress = createAsyncThunk(
     "userAddress/update",
     async ({id ,body} , { rejectWithValue }) => {
         try {
-            const response = await useUpdateData(`/api/v1/addresses/${id}`, body);    
+            const response = await useUpdateData(`/addresses/${id}`, body);    
             console.log("The res or pdate address", response)
             if (!response) {
                 throw new Error("لم يتم استلام استجابة من السيرفر");
@@ -82,7 +82,7 @@ export const updateUserAddress = createAsyncThunk(
 //GET SPECIFIC USER ADDRESS
 export const featchOneAddress = createAsyncThunk( "userAddress/getSpecific", async (id, { rejectWithValue }) => {
     try {
-        const response = await useGetDataToken(`/api/v1/addresses/${id}`);
+        const response = await useGetDataToken(`/addresses/${id}`);
         console.log("API Response get specific user address:", response);
         return response;
     } catch (error) {

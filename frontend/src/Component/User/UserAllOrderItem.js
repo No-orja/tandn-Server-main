@@ -35,7 +35,7 @@ export default function UserAllOrderItem({order}){
                 </Col>
                 <Col xs="6" className="d-flex justify-content-end">
                     <div>
-                        <div className="barnd-text">{order?.totalOrderPrice || 0} جنية</div>
+                        <div className="barnd-text">{order?.totalOrderPrice || 0} ₪</div>
                     </div>
                 </Col>
             </Row>

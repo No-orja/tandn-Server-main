@@ -17,7 +17,7 @@ export default function SliderBootStrap() {
       <Carousel.Item className='slider-background' interval={2000} onSelect={handlSelect}>
         <div className='d-flex flex-row justify-content-center align-items-center'>
             <img
-            style={{height:"296px", width:"313.53px"}}
+            style={{height:"296px", width:"313.53px", objectFit:"contain", objectPosition:"center"}}
             className=""
             src={sliderimg}
             alt="First slide"
@@ -33,7 +33,7 @@ export default function SliderBootStrap() {
       <Carousel.Item className='slider-background2' interval={2000}>
         <div className='d-flex flex-row justify-content-center align-items-center'>
             <img
-            style={{height:"296px", width:"313.53px"}}
+            style={{height:"296px", width:"313.53px", objectFit:"contain", objectPosition:"center"}}
             className=""
             src={slider4}
             alt="First slide"
@@ -49,7 +49,7 @@ export default function SliderBootStrap() {
       <Carousel.Item className='slider-background3' interval={2000}>
         <div className='d-flex flex-row justify-content-center align-items-center'>
             <img
-            style={{height:"296px", width:"313.53px"}}
+            style={{height:"296px", width:"313.53px", objectFit:"contain", objectPosition:"center"}}
             className=""
             src={prod3}
             alt="First slide"
@@ -65,7 +65,7 @@ export default function SliderBootStrap() {
       <Carousel.Item className='slider-background4' interval={2000}>
         <div className='d-flex flex-row justify-content-center align-items-center'>
             <img
-            style={{height:"296px", width:"313.53px"}}
+            style={{height:"296px", width:"313.53px", objectFit:"contain", objectPosition:"center"}}
             className=""
             src={prod4}
             alt="First slide"

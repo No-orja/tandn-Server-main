@@ -66,8 +66,15 @@ export default function AddProductHook(){
         formData.append("brand", BrandID);
 
         colors.forEach((color) => formData.append("availableColors", color));
-        options.forEach((item) => formData.append("subcategory", item._id));
-        images.slice(1).forEach((img) => formData.append("images", img.file));
+        // only valid subcategory ids — never send "undefined"
+        options.forEach((item) => { if (item?._id) formData.append("subcategory", item._id); });
+        // first image is the cover (sent above); only the REST go to images
+        images.slice(1).forEach((img) => { if (img.file) formData.append("images", img.file); });
+        // The server's product model defaults ratingsAverage to 0 but also enforces
+        // min:1, so a create with no/0 rating is rejected ("Rating must be above or
+        // equal 1.0"). Send the minimum valid value so creation succeeds. We do NOT
+        // send ratingsQuantity (it defaults to 0 fine).
+        formData.append("ratingsAverage", 1);
 
         console.log("🟢 Data being sent:", [...formData.entries()]);
 
@@ -77,8 +84,10 @@ export default function AddProductHook(){
             console.log("✅ Product added successfully:", response);
             notify("تمت إضافة المنتج بنجاح", "success");
         } catch (error) {
-            console.error("❌ Error in submission:", error);
-            notify("حدث خطأ أثناء الإضافة", "error");
+            // error is now the server's response.data (see featchAddProduct rejectWithValue)
+            console.error("❌ Error in submission (server said):", error);
+            const serverMsg = error?.errors?.[0]?.msg || error?.message || "حدث خطأ أثناء الإضافة";
+            notify(serverMsg, "error");
         }
         setLoading(false);
     };

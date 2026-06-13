@@ -5,7 +5,7 @@ import {useGetData} from "../../Hooks/UseGetData";
 //CREAT SUBCATEGORY 
 export const featchAddSubCategory = createAsyncThunk("CREATE_SUBCATEGORY", async (data)=>{
 
-    const response = await useInsertData(`/api/v1/subcategories`, data)
+    const response = await useInsertData(`/subcategories`, data)
 
     console.log("API Response AddSubCategory: ", response); 
     return response
@@ -13,14 +13,14 @@ export const featchAddSubCategory = createAsyncThunk("CREATE_SUBCATEGORY", async
 })
 
 export const featchAllSubCategory = createAsyncThunk("ALL_SUBCATEGORY", async ()=>{
-    const response = await useGetData("/api/v1/subcategories")
+    const response = await useGetData("/subcategories")
     console.log("API Response AllSubCategory: ", response); 
     return response
 
 })
 
 export const featchOneSubCategory = createAsyncThunk("GET_ONE_CATEGOTY", async (id)=>{
-    const response = await useGetData(`/api/v1/categories/${id}/subcategories`)
+    const response = await useGetData(`/categories/${id}/subcategories`)
     console.log("API Response get one subCategory: ", response); 
     return response
 

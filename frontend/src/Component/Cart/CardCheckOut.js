@@ -69,9 +69,9 @@ export default function CardCheckOut({items,tatalPrice, couponNameUsed, totalAft
                         ):(
                             totalAfterDiscount >= 1 ?
                             (
-                                `${totalAfterDiscount} جبنيه ، بعد الخصم`
+                                `${totalAfterDiscount} ₪ ، بعد الخصم`
                             ):(
-                                `${tatalPrice} جبنيه`
+                                `${tatalPrice} ₪`
                             )
                         )
 

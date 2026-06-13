@@ -3,6 +3,7 @@ import AdminAllProductsCard from "./AdminAllProductsCard";
 import CartImpty from "../../Image/CartImpty.png"
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import { ToastContainer } from "react-toastify";
 import { featchAllProduct,featchAllProductPage } from "../../Redux/Reduser/ProductSliceReducer";
 
 export default function AdminAllProducts(){
@@ -70,8 +71,9 @@ export default function AdminAllProducts(){
                         )
                     )
                 }
-                                
+
             </Row>
+            <ToastContainer />
         </div>
     )
 }

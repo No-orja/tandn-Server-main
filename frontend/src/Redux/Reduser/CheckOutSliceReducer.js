@@ -6,7 +6,7 @@ import {useUpdateData } from "../../Hooks/UseUpdateData"
 export const addCashOrder = createAsyncThunk("cashOrder/add",
     async ({id,shippingAddress}, { rejectWithValue }) => {
         try {
-            const response = await useInsertData(`/api/v1/orders/${id}`, shippingAddress);
+            const response = await useInsertData(`/orders/${id}`, shippingAddress);
             console.log("API Response add cash card:", response);
             return response;
         } catch (error) {
@@ -21,7 +21,7 @@ export const getAllUserOrder = createAsyncThunk(
     "userOrder/getAll",
     async (queryString = "", { rejectWithValue }) => {
         try {
-            const response = await useGetDataToken(`/api/v1/orders${queryString ? `?${queryString}` : ""}`);
+            const response = await useGetDataToken(`/orders${queryString ? `?${queryString}` : ""}`);
             console.log("API Response all user order:", response);
             return response;
         } catch (error) {
@@ -34,7 +34,7 @@ export const getAllUserOrder = createAsyncThunk(
 //GET SPECIFIC USER ORDER
 export const featchOneOrser = createAsyncThunk( "userOrder/getSpecific", async (id, { rejectWithValue }) => {
     try {
-        const response = await useGetDataToken(`/api/v1/orders/${id}`);
+        const response = await useGetDataToken(`/orders/${id}`);
         console.log("API Response get specific user order:", response);
         return response;
     } catch (error) {
@@ -48,7 +48,7 @@ export const updateToPaid = createAsyncThunk(
     "userOrder/updateToPaid",
     async (id, { rejectWithValue }) => {
         try {
-            const response = await useUpdateData(`/api/v1/orders/${id}/pay`);
+            const response = await useUpdateData(`/orders/${id}/pay`);
             console.log("API Response update to paid:", response);
             return response;
         } catch (error) {
@@ -63,7 +63,7 @@ export const updateToDelivered = createAsyncThunk(
     "userOrder/updateToDelivered",
     async (id, { rejectWithValue }) => {
         try {
-            const response = await useUpdateData(`/api/v1/orders/${id}/deliver`);
+            const response = await useUpdateData(`/orders/${id}/deliver`);
             console.log("API Response update to delivered:", response);
             return response;
         } catch (error) {

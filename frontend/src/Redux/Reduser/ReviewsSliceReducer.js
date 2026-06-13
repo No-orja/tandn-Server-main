@@ -7,7 +7,7 @@ import { useUpdateData } from "../../Hooks/UseUpdateData";
 //ADD REVIEW
 export const featchAddReviewProduct = createAsyncThunk("ADD_REVIEW_PRODUCT", async ({ id, body }, { rejectWithValue })=>{
     try{
-        const response = await useInsertData(`/api/v1/products/${id}/reviews`, body)
+        const response = await useInsertData(`/products/${id}/reviews`, body)
         console.log("API Response Review product:", response); 
         return response;        
     }catch(error){
@@ -19,7 +19,7 @@ export const featchAddReviewProduct = createAsyncThunk("ADD_REVIEW_PRODUCT", asy
 //ADD REVIEW
 export const featchAllReviewProduct = createAsyncThunk("ALL_REVIEW_PRODUCT", async ({id, limit, page}, { rejectWithValue })=>{
     try{
-        const response = await useGetData(`/api/v1/products/${id}/reviews?limit=${limit}&page=${page}`)
+        const response = await useGetData(`/products/${id}/reviews?limit=${limit}&page=${page}`)
         console.log("API Response all Review product:", response); 
         return response;        
     }catch(error){
@@ -31,7 +31,7 @@ export const featchAllReviewProduct = createAsyncThunk("ALL_REVIEW_PRODUCT", asy
 //DELETE SPECIFIC REVIEW
 export const featchDeleteSpecificReview = createAsyncThunk("DELETE_SPECIFIC_REVIEW", async (id, { rejectWithValue })=>{
     try{
-        const response = await useDeleteDataToken(`/api/v1/reviews/${id}`)
+        const response = await useDeleteDataToken(`/reviews/${id}`)
         console.log("API Response delete specific Review :", response); 
         return response;        
     }catch(error){
@@ -43,7 +43,7 @@ export const featchDeleteSpecificReview = createAsyncThunk("DELETE_SPECIFIC_REVI
 //UPDATE SPECIFIC REVIEW
 export const featchUpdateSpecificReview = createAsyncThunk("UPDATE_SPECIFIC_REVIEW", async ({id, body}, { rejectWithValue })=>{
     try{
-        const response = await useUpdateData(`/api/v1/reviews/${id}`, body)
+        const response = await useUpdateData(`/reviews/${id}`, body)
         console.log("API Response update specific Review :", response); 
         return response;        
     }catch(error){

@@ -42,7 +42,7 @@ export default function AdminAddProducts() {
 
                     {/* Select Category */}
                     <select name="mainCategory" onChange={onSelectCategory} className="select input-form-area mt-3 px-2">
-                        <option value="val">التصنيف الرئيسي</option>
+                        <option value="">التصنيف الرئيسي</option>
                         {allCategory?.map((category) => (
                             <option key={category._id} value={category._id}>{category.name}</option>
                         ))}
@@ -52,7 +52,7 @@ export default function AdminAddProducts() {
 
                     {/* Select Brand */}
                     <select name="brand" onChange={onSelectBrand} className="select input-form-area mt-3 px-2">
-                        <option value="val">الماركة</option>
+                        <option value="">الماركة</option>
                         {allBrand.map((brand) => (
                             <option key={brand._id} value={brand._id}>{brand.name}</option>
                         ))}

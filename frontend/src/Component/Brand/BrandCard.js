@@ -21,7 +21,7 @@ export default function BrandCard({img, id}){
                     backgroundColor: "#FFFFFF",
                 }}>
                 <Link to={`/products/brand/${id}`}>
-                    <Card.Img style={{ width: "100%", height: "151px" }} src={img} />            
+                    <Card.Img style={{ width: "100%", height: "151px", objectFit: "contain", objectPosition: "center", backgroundColor: "#fff", padding: "10px" }} src={img} />
                 </Link>
             </Card>
         </Col>

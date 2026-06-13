@@ -40,7 +40,7 @@ export default function AdminAllOrdersItem({item}){
                         </Col>
                         <Col xs="6" className="d-flex justify-content-end">
                             <div>
-                                <div className="barnd-text">{item?.totalOrderPrice || 0} جنية</div>
+                                <div className="barnd-text">{item?.totalOrderPrice || 0} ₪</div>
                             </div>
                         </Col>
                     </Row>

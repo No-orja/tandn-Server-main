@@ -8,7 +8,7 @@ import { useUpdateData } from "../../Hooks/UseUpdateData";
 //ADD COPONE
 export const featchAddComponentProduct = createAsyncThunk("ADD_COUPONE_PRODUCT", async (body, { rejectWithValue })=>{
     try{
-        const response = await useInsertData(`/api/v1/coupons`, body)
+        const response = await useInsertData(`/coupons`, body)
         console.log("API Response add copone product:", response); 
         return response;        
     }catch(error){
@@ -20,7 +20,7 @@ export const featchAddComponentProduct = createAsyncThunk("ADD_COUPONE_PRODUCT",
 //ALL COPONE
 export const featchAllComponentProduct = createAsyncThunk("ALL_COUPONE_PRODUCT", async (_,{ rejectWithValue })=>{
     try{
-        const response = await useGetDataToken(`/api/v1/coupons`)
+        const response = await useGetDataToken(`/coupons`)
         console.log("API Response all copone product:", response); 
         return response;        
     }catch(error){
@@ -31,7 +31,7 @@ export const featchAllComponentProduct = createAsyncThunk("ALL_COUPONE_PRODUCT",
 //ALL COPONE
 export const featchDeleteComponentProduct = createAsyncThunk("DELETE_COUPONE_PRODUCT", async (id,{ rejectWithValue })=>{
     try{
-        const response = await useDeleteDataToken(`/api/v1/coupons/${id}`)
+        const response = await useDeleteDataToken(`/coupons/${id}`)
         console.log("API Response delete copone product:", response); 
         return response;        
     }catch(error){
@@ -44,7 +44,7 @@ export const featchDeleteComponentProduct = createAsyncThunk("DELETE_COUPONE_PRO
 export const featchUpdateCouponeProduct = createAsyncThunk("UPDATE_COUPONE_PRODUCT", async (id, {body},{ rejectWithValue })=>{
     try{
         console.log("doing update")
-        const response = await useUpdateData(`/api/v1/coupons/${id}`, body)
+        const response = await useUpdateData(`/coupons/${id}`, body)
         console.log("API Response update copone product:", response); 
         return response;        
     }catch(error){
@@ -56,7 +56,7 @@ export const featchUpdateCouponeProduct = createAsyncThunk("UPDATE_COUPONE_PRODU
 //SPICIFIC COPONE
 export const featchSpicificComponentProduct = createAsyncThunk("SPICIFIC_COUPONE_PRODUCT", async (id,{ rejectWithValue })=>{
     try{
-        const response = await useGetDataToken(`/api/v1/coupons/${id}`)
+        const response = await useGetDataToken(`/coupons/${id}`)
         console.log("API Response spicific copone product:", response); 
         return response;        
     }catch(error){
